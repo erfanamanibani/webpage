@@ -1,15 +1,29 @@
 /* Design tokens */
 :root {
-  --accent: #0a66c2;
-  --accent-soft: #e6f0fb;
-  --accent-soft-stronger: #d5e4fa;
-  --text-main: #1f2933;
-  --text-muted: #5f6c80;
-  --bg-page: #f5f5f7;
+  /* Core Colors */
+  --accent: #0056b3; /* Academic Blue */
+  --accent-hover: #004494;
+  --accent-soft: #f0f7ff;
+  --accent-soft-stronger: #dbeafe;
+  
+  /* Text Colors */
+  --text-main: #1e293b; /* Slate 800 */
+  --text-muted: #64748b; /* Slate 500 */
+  --text-light: #94a3b8;
+  
+  /* Backgrounds */
+  --bg-page: #f8fafc; /* Slate 50 */
   --bg-card: #ffffff;
-  --border-subtle: #e3e3e8;
-  --radius-card: 16px;
-  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+  
+  /* UI Elements */
+  --border-subtle: #e2e8f0; /* Slate 200 */
+  --radius-card: 12px;
+  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 /* Basic reset */
@@ -29,10 +43,17 @@ html {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   color: var(--text-main);
-  background: radial-gradient(circle at top left, #f1f5ff 0, var(--bg-page) 45%, #f7f7f7 100%);
+  background-color: var(--bg-page);
+  background-image: radial-gradient(circle at top right, #f1f5f9 0%, transparent 40%),
+                    radial-gradient(circle at top left, #e0f2fe 0%, transparent 40%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: #0f172a;
 }
 
 /* Header / nav */
@@ -57,9 +78,11 @@ body {
 }
 
 .branding .name {
-  font-weight: 650;
-  font-size: 1.4rem;
-  letter-spacing: 0.01em;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: #0f172a;
 }
 
 .affiliation-short {
@@ -133,9 +156,15 @@ body {
 .profile-card {
   background-color: var(--bg-card);
   border-radius: var(--radius-card);
-  padding: 1.6rem 1.6rem 1.8rem;
+  padding: 2rem;
   box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 /* Elliptical portrait frame */
@@ -161,9 +190,12 @@ body {
 /* Name / role */
 
 .profile-name {
-  margin: 0 0 0.25rem;
-  font-size: 1.55rem;
+  font-family: var(--font-serif);
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   text-align: center;
+  color: #0f172a;
 }
 
 .profile-role {
@@ -235,19 +267,21 @@ body {
 }
 
 .section {
-  margin-bottom: 2.25rem;
-  padding: 1.2rem 1.4rem 1.3rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
   border-radius: var(--radius-card);
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
 }
 
 .section h2 {
-  font-size: 1.3rem;
-  margin: 0 0 0.55rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border-subtle);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--accent-soft);
+  color: var(--accent);
 }
 
 .section h3 {
@@ -290,26 +324,46 @@ body {
 /* Publications */
 
 .pub-list {
-  padding-left: 1.25rem;
-  margin: 0.5rem 0 0;
+  padding-left: 0;
+  list-style: none;
+  margin: 1rem 0 0;
 }
 
 .pub-item {
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background-color: #fcfcfd;
+  transition: all 0.2s ease;
+}
+
+.pub-item:hover {
+  background-color: #ffffff;
+  border-color: var(--accent-soft-stronger);
+  box-shadow: var(--shadow-soft);
+  transform: translateX(4px);
 }
 
 .pub-title {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
 }
 
 .pub-authors {
-  font-size: 0.9rem;
-  color: #4b5563;
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
 }
 
 .pub-venue {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: 0.875rem;
+  color: var(--accent);
+  font-style: italic;
+  font-family: var(--font-serif);
 }
 
 /* Experience / service blocks */
